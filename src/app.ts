@@ -1,9 +1,10 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
 import { swaggerUI } from "@hono/swagger-ui";
+import { cors } from "hono/cors";
 import router from "./router";
 
 const app = new OpenAPIHono();
-
+app.use("*", cors());
 app.route("/", router);
 
 app.get("/ui", swaggerUI({ url: "/doc" }));
